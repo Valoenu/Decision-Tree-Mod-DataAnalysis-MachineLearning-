@@ -132,8 +132,7 @@ def make_results(model_name, model_object):
     precision = best_estimator_results.mean_test_precision
     accuracy = best_estimator_results.mean_test_accuracy
   
-    # Create table of results
-    table = pd.DataFrame()
+
     # Create table of results
     table = pd.DataFrame({'Model': [model_name],
                           'F1': [f1],
