@@ -1,0 +1,11 @@
+# Define a path to the folder where you want to save the model
+path = '/home/jovyan/work/'
+
+# Pickle the model
+with open(path+'rf_cv_model.pickle', 'wb') as to_write:
+    pickle.dump(rf_cv, to_write)
+
+
+# Read in pickled model
+with open(path + 'rf_cv_model.pickle', 'rb') as to_read:
+    rf_cv = pickle.load(to_read)
