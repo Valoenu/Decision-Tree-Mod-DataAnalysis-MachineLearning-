@@ -14,7 +14,6 @@ from sklearn.metrics import recall_score, precision_score, f1_score, accuracy_sc
 # Import function that display the splits of the tree
 from sklearn.tree import plot_tree
 
-
 #Read in data
 file = "../Datasets/Churn_Modeling.csv 
 data = pd.read.csv(file)
@@ -48,7 +47,6 @@ x = x.drop('Exited', axis=1)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, stratify=y, random_state=40) #We use train_test_split function, Stratify (To avoid bias, more reliable evaluation)
 
 
-
 #Train base line decision model
 #Instantiate the Model
 tree_decision = DecisionTreeClassifier(random_state=0)
@@ -78,19 +76,15 @@ def confusion_matrix_plot(model, x_data, y_data):
 # Generate Confusion matrix
 confusion_matrix_plot(tree_decision, x_test, y_test)
 
-
 # Finally, plot the tree
 plt.figure(figsize=(15, 12))
 plot_tree(tree_decision, max_depth=2, fontsize=14, feature_names=x.columns, class_names={0: 'stayed', 1:'churned'}, filled=True); # If we didn't set the max_depth the function will return entire tree,class_name (what the majority class of each node is), filled(color the nodes according to the majority class)
 plt.show()
 
-
-
 # Tune and validate decision trees with Python
 
 # Import GridSearchCV
 from sklearn.model_selection import GridSearchCV
-
 
 # Instantiate the classifier 
 tuned_decision_tree = DecisionTreeClassifier(random_state=42)
@@ -100,7 +94,6 @@ tree_paramateres = {'max_depth': [4,5,6,7,8,9,10,12,15,20,30,40,50], 'min_sample
 
 # Assign a set of scoring metrics to capture
 scoring = {'accuracy', 'precision', 'recall', 'f1'}
-
 
 # Instantiate the GridSearchCV object. Pass as arguments: The classifier (tuned_decision_tree), The dictionary of hyperparameters to search over (tree_para), The set of scoring metrics (scoring),The number of cross-validation folds you want (cv=5), The scoring metric that you want GridSearch to use when it selects the "best" model (i.e., the model that performs best on average over all validation folds) (refit='f1'*)
 %%time
@@ -114,7 +107,6 @@ clf.best_estimator_
 
 # Now, print yours results
 print("Best Avg. Validation Score: ", "%.4f" % clf.best_score_)
-
 
 
 # These other metrics are much more directly interpretable, so they're worth knowing. The following cell defines a helper function that extracts these scores from the fit GridSearchCV object and returns a pandas dataframe with all four scores from the model with the best average F1 score during validation. This function will help us later when we want to add the results of other models to the table.
@@ -132,7 +124,6 @@ def make_results(model_name, model_object):
     precision = best_estimator_results.mean_test_precision
     accuracy = best_estimator_results.mean_test_accuracy
   
-
     # Create table of results
     table = pd.DataFrame({'Model': [model_name],
                           'F1': [f1],
