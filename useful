@@ -9,3 +9,5 @@ with open(path+'rf_cv_model.pickle', 'wb') as to_write:
 # Read in pickled model
 with open(path + 'rf_cv_model.pickle', 'rb') as to_read:
     rf_cv = pickle.load(to_read)
+
+'It helps us to save our model, instead redownloading again and again'
