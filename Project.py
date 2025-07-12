@@ -45,7 +45,7 @@ y = churn_data['Exited'] #Our goal column
 x = churn_data.copy()
 x = x.drop('Exited', axis=1)
 
-x_train, x_test, y_train, y_test = train_test(x, y, test_size=0.25, stratify=y, random_state=40) #We use train_test_split function, Stratify (To avoid bias, more reliable evaluation)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25, stratify=y, random_state=40) #We use train_test_split function, Stratify (To avoid bias, more reliable evaluation)
 
 
 
