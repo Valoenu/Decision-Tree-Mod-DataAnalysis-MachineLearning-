@@ -70,7 +70,7 @@ def confusion_matrix_plot(model, x_data, y_data):
   '''Returns a plot of confusion matrix for predictions on y data'''
   
   model_pred = model_predict(x_data)
-  cm = confussion_matrix(y_daya, model_pred, label=model.classes_)
+  cm = confussion_matrix(y_data, model_pred, label=model.classes_)
   disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_label=model.classes_)
   disp.plot()
   plt.show()
