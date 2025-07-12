@@ -42,7 +42,7 @@ churn_data.head()
 #We have to split our data into test and train 
 y = churn_data['Exited'] #Our goal column
 
-x = chirn_data.copy()
+x = churn_data.copy()
 x = x.drop('Exited', axis=1)
 
 x_train, x_test, y_train, y_test = train_test(x, y, test_size=0.25, stratify=y, random_state=40) #We use train_test_split function, Stratify (To avoid bias, more reliable evaluation)
@@ -72,7 +72,6 @@ def confusion_matrix_plot(model, x_data, y_data):
   model_pred = model_predict(x_data)
   cm = confussion_matrix(y_daya, model_pred, label=model.classes_)
   disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_label=model.classes_)
-
   disp.plot()
   plt.show()
 
@@ -97,17 +96,14 @@ from sklearn.model_selection import GridSearchCV
 tuned_decision_tree = DecisionTreeClassifier(random_state=42)
 
 # Assign a dictionary of hyperparameters to search over
-
 tree_paramateres = {'max_depth': [4,5,6,7,8,9,10,12,15,20,30,40,50], 'min_samples_leaf': [2, 5, 10, 20, 50]}
 
 # Assign a set of scoring metrics to capture
-
 scoring = {'accuracy', 'precision', 'recall', 'f1'}
 
 
 # Instantiate the GridSearchCV object. Pass as arguments: The classifier (tuned_decision_tree), The dictionary of hyperparameters to search over (tree_para), The set of scoring metrics (scoring),The number of cross-validation folds you want (cv=5), The scoring metric that you want GridSearch to use when it selects the "best" model (i.e., the model that performs best on average over all validation folds) (refit='f1'*)
 %%time
-
 clf = GridSearchCV(tuned_decision_tree, tree_parameters, scoring=scoring, cv=5, refit="f1")
 
 # Fit the data (X_train, y_train) to the GridSearchCV object (clf)
@@ -122,8 +118,6 @@ print("Best Avg. Validation Score: ", "%.4f" % clf.best_score_)
 
 
 # These other metrics are much more directly interpretable, so they're worth knowing. The following cell defines a helper function that extracts these scores from the fit GridSearchCV object and returns a pandas dataframe with all four scores from the model with the best average F1 score during validation. This function will help us later when we want to add the results of other models to the table.
-
-
 def make_results(model_name, model_object):
     
     # Get all the results from the CV and put them in a df
